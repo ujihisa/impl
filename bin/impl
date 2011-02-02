@@ -1,0 +1,5 @@
+require 'impl'
+ctags = File.read('tags')
+dir = File.expand_path '.'
+puts Impl.generate(ctags, dir)
+# vim: set ft=ruby :
