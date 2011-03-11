@@ -23,12 +23,20 @@ module Impl
     impl version #{VERSION}
 
     USAGE
-      impl -h: shows this message
-      impl:    shows additional information, assuming you already have |tags|
-               and Ruby codes in the current directory.
-      impl --suite {directory}:
-               generates new |tags| file in {directory} using files in
+      impl -h:
+               shows this message
+      impl {directory} {method name}
+               shows the file name and line number where {method name} like
+               'Strimg#sum' defined, assuming the Ruby source directory is
                {directory}.
+      impl -d {directory} {method name}
+      impl --description {directory} {method name}
+               shows the description of {method name} like 'Strimg#sum'
+               directly, assuming the Ruby source directory is {directory}.
+      impl -c {directory}:
+      impl --create {directory}:
+               shows additional information, assuming you already have
+               |tags| and Ruby codes in the current directory.
     EOH
   end
   module_function :help
