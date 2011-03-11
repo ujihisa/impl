@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 require 'impl'
 case ARGV.shift
-when '-h'
+when '-h', '--help', '-v', '--version'
   puts Impl.help
 when '--suite'
   Dir.chdir(File.expand_path(ARGV.shift)) do
