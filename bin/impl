@@ -8,9 +8,11 @@ when '-h', '--help', '-v', '--version'
 #    additional = `#{__FILE__}`
 #    File.open('tags', 'a') {|io| io.puts additional }
 #  end
-else
+when '-c', '--create'
   ctags = File.read('tags')
   dir = File.expand_path '.'
   puts Impl.generate(ctags, dir)
+else
+  abort 'not implemented yet'
 end
 # vim: set ft=ruby :
