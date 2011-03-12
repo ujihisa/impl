@@ -10,7 +10,7 @@ module Enumerable
 end
 
 module Impl
-  VERSION = '1.0'
+  VERSION = '1.1'
 
   def generate(ctags, dir)
     memo = []
