@@ -53,6 +53,17 @@ module Impl
   module_function :help
 
   def direct(base, name)
+    unless File.exists?(base + 'tags')
+      Dir.chdir base do
+        system 'ctags -R'
+      end
+    end
+    if /^String#sum/ !~ File.read(base + 'tags')
+      Dir.chdir base do
+        system 'impl -c .', out: ['tags', 'a']
+      end
+    end
+
     x = File.read(base + 'tags').
       each_line.
       select {|l| /^#{name}\t/ =~ l }.
