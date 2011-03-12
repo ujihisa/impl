@@ -1,3 +1,14 @@
+module Enumerable
+  def take_until
+    memo = []
+    each do |x|
+      memo << x
+      break if yield x
+    end
+    memo
+  end
+end
+        
 module Impl
   VERSION = '1.0'
 
@@ -40,4 +51,21 @@ module Impl
     EOH
   end
   module_function :help
+
+  def direct(base, name)
+    x = File.read(base + 'tags').
+      each_line.
+      select {|l| /^#{name}\t/ =~ l }.
+      map {|l| l.split("\t") }.
+      first
+    r = Regexp.new(x[2][1..-4].gsub(/[\(\*\)]/) {|x| '\\' << x })
+    file = base + x[1]
+    content = File.read(file)
+    line, i = content.
+      each_line.
+      with_index.
+      detect {|line, _| r =~ line }
+    content.each_line.drop(i).take_until {|line| /^}/ =~ line }
+  end
+  module_function :direct
 end

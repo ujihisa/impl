@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
+require 'pathname'
 require 'impl'
-case ARGV.shift
+case ARGV[0]
 when '-h', '--help', '-v', '--version'
   puts Impl.help
 #when '--suite'
@@ -13,6 +14,8 @@ when '-c', '--create'
   dir = File.expand_path '.'
   puts Impl.generate(ctags, dir)
 else
-  abort 'not implemented yet'
+  base = Pathname(ARGV.shift).expand_path
+  name = ARGV.shift
+  puts Impl.direct(base, name)
 end
 # vim: set ft=ruby :
