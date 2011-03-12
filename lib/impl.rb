@@ -8,7 +8,7 @@ module Enumerable
     memo
   end
 end
-        
+
 module Impl
   VERSION = '1.0'
 
