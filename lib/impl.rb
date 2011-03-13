@@ -10,7 +10,7 @@ module Enumerable
 end
 
 module Impl
-  VERSION = '1.1'
+  VERSION = '1.2'
 
   def generate(ctags, dir)
     memo = []
@@ -66,7 +66,7 @@ module Impl
 
     x = File.read(base + 'tags').
       each_line.
-      select {|l| /^#{name}\t/ =~ l }.
+      select {|l| /^#{Regexp.escape name}\t/ =~ l }.
       map {|l| l.split("\t") }.
       first
     r = Regexp.new(x[2][1..-4].gsub(/[\(\*\)]/) {|x| '\\' << x })
